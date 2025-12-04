@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hesapsız | Serhat Kiraz</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#4361ee;
+  --primary-dark:#3a56d4;
+  --secondary:#7209b7;
+  --success:#4cc9f0;
+  --danger:#f72585;
+  --warning:#f9c74f;
+  --light:#f8f9fa;
+  --dark:#212529;
+  --gray:#6c757d;
+  --border-radius:12px;
+  --box-shadow:0 8px 30px rgba(0,0,0,0.12);
+  --transition:all .3s ease;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+
+body{
+  background:linear-gradient(135deg,#f5f7fa,#c3cfe2);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  color:var(--dark);
+}
+
+.calculator{
+  background:white;
+  width:100%;
+  max-width:800px;
+  border-radius:var(--border-radius);
+  box-shadow:var(--box-shadow);
+  overflow:hidden;
+}
+
+.header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:white;
+  padding:25px 30px;
+  position:relative;
+}
+
+.header h1{
+  font-size:1.8rem;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.subtitle{
+  font-size:.95rem;opacity:.9;margin-top:5px;
+}
+
+.clear-btn{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:rgba(255,255,255,0.2);
+  border:none;
+  color:white;
+  padding:8px 16px;
+  border-radius:50px;
+  font-size:.9rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:var(--transition);
+}
+
+.clear-btn:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px);}
+
+.content{
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+.section{
+  background:var(--light);
+  border:1px solid #eaeaea;
+  border-radius:var(--border-radius);
+  padding:22px;
+}
+
+.section-title{
+  font-size:1.1rem;
+  font-weight:600;
+  margin-bottom:18px;
+  color:var(--primary);
+  display:flex;align-items:center;gap:10px;
+}
+
+textarea{
+  width:100%;
+  padding:14px 16px;
+  border:2px solid #e0e0e0;
+  border-radius:8px;
+  font-size:1rem;
+  resize:vertical;
+  min-height:55px;
+  max-height:250px;
+  transition:var(--transition);
+}
+
+textarea:focus{
+  outline:none;
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(67,97,238,0.2);
+}
+
+.btn{
+  padding:14px 24px;
+  border:none;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  transition:var(--transition);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.btn-primary{background:var(--primary);color:white;}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);}
+
+.btn-group{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+}
+
+.result-container{
+  background:#f8f9ff;
+  border:1px solid #e0e7ff;
+  border-radius:var(--border-radius);
+}
+
+.result-header{
+  background:linear-gradient(90deg,#4cc9f0,#4361ee);
+  color:white;
+  padding:18px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+#result{
+  padding:25px;
+  min-height:120px;
+  max-height:350px;
+  overflow-y:auto;
+  font-size:1.1rem;
+  word-break:break-all;
+}
+
+footer{
+  text-align:center;
+  padding:18px;
+  color:var(--gray);
+  font-size:.9rem;
+  border-top:1px solid #eee;
+}
+</style>
+</head>
+
+<body>
+<div class="calculator">
+
+  <div class="header">
+    <h1><i class="fas fa-calculator"></i> Hesapsız</h1>
+    <p class="subtitle">Büyük Sayılar İçin Sınırsız Hesap Makinesi</p>
+    <button class="clear-btn" onclick="resetAll()"><i class="fas fa-redo"></i> RESET</button>
+  </div>
+
+  <div class="content">
+
+    <!-- Girdi Alanları -->
+    <div class="section">
+      <div class="section-title"><i class="fas fa-sliders-h"></i> Sayıları Girin</div>
+
+      <label>Birinci sayı</label>
+      <textarea id="numA" placeholder="Birinci sayı..."></textarea>
+
+      <label style="margin-top:15px;">İkinci sayı</label>
+      <textarea id="numB" placeholder="İkinci sayı..."></textarea>
+    </div>
+
+    <!-- Dört İşlem -->
+    <div class="section">
+      <div class="section-title"><i class="fas fa-divide"></i> İşlem Seçin</div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="calc('add')"><i class="fas fa-plus"></i> Topla</button>
+        <button class="btn btn-primary" onclick="calc('sub')"><i class="fas fa-minus"></i> Çıkar</button>
+        <button class="btn btn-primary" onclick="calc('mul')"><i class="fas fa-times"></i> Çarp</button>
+        <button class="btn btn-primary" onclick="calc('div')"><i class="fas fa-divide"></i> Böl</button>
+      </div>
+    </div>
+
+    <!-- Sonuç -->
+    <div class="result-container">
+      <div class="result-header">
+        <div class="result-title"><i class="fas fa-chart-line"></i> Sonuç</div>
+      </div>
+      <div id="result"><i class="fas fa-info-circle"></i> Henüz işlem yapılmadı.</div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p><i class="far fa-lightbulb"></i> Tüm hesaplamalar tarayıcınızda gerçekleşir. Verileriniz kaydedilmez.</p>
+    <p>© 2025 <a href="https://serhatkiraz.github.io/" target="_blank" style="color:inherit;font-weight:600;text-decoration:none;">Serhat Kiraz</a> — Hesapsız</p>
+  </footer>
+
+</div>
+
+<script>
+// ----------------------------
+//  BÜYÜK SAYI HESAPLAMA MOTORU
+// ----------------------------
+
+// String → Remove spaces
+function clean(n){
+  return n.replace(/\s+/g,"").replace(/^0+(?=\d)/,"");
+}
+
+// Str → Compare
+function cmp(a,b){
+  a = clean(a); b = clean(b);
+  if(a.length !== b.length) return a.length > b.length ? 1 : -1;
+  if(a === b) return 0;
+  return a > b ? 1 : -1;
+}
+
+// String Toplama
+function add(a,b){
+  a = clean(a); b = clean(b);
+  let res="",carry=0;
+  a = a.split("").reverse();
+  b = b.split("").reverse();
+
+  let m = Math.max(a.length,b.length);
+  for(let i=0;i<m;i++){
+    let x = parseInt(a[i]||"0");
+    let y = parseInt(b[i]||"0");
+    let s = x+y+carry;
+    res = (s%10)+res;
+    carry = Math.floor(s/10);
+  }
+  if(carry) res = carry+res;
+  return res;
+}
+
+// String Çıkarma  (a ≥ b)
+function sub(a,b){
+  a = clean(a); b = clean(b);
+  if(cmp(a,b)===0) return "0";
+
+  let res="",borrow=0;
+  a = a.split("").reverse();
+  b = b.split("").reverse();
+
+  for(let i=0;i<a.length;i++){
+    let x = parseInt(a[i]);
+    let y = parseInt(b[i]||"0");
+    x -= borrow;
+
+    if(x<y){x+=10;borrow=1;} else borrow=0;
+
+    res = (x-y)+res;
+  }
+  return clean(res);
+}
+
+// String Çarpma
+function mul(a,b){
+  a = clean(a); b = clean(b);
+  if(a==="0"||b==="0") return "0";
+
+  let A = a.split("").reverse();
+  let B = b.split("").reverse();
+  let res = Array(a.length+b.length).fill(0);
+
+  for(let i=0;i<A.length;i++){
+    for(let j=0;j<B.length;j++){
+      let p = parseInt(A[i]) * parseInt(B[j]);
+      res[i+j] += p;
+    }
+  }
+
+  for(let i=0;i<res.length;i++){
+    if(res[i]>=10){
+      res[i+1] += Math.floor(res[i]/10);
+      res[i] %= 10;
+    }
+  }
+
+  while(res.length>1 && res[res.length-1]===0)
+    res.pop();
+
+  return res.reverse().join("");
+}
+
+// Uzun Bölme (tam bölüm)
+function div(a,b){
+  a = clean(a);
+  b = clean(b);
+  if(b==="0") return "Tanımsız";
+  if(cmp(a,b)<0) return "0";
+
+  let result="";
+  let cur="";
+
+  for(let digit of a){
+    cur += digit;
+    cur = clean(cur);
+
+    let count=0;
+    while(cmp(cur,b)>=0){
+      cur = sub(cur,b);
+      count++;
+    }
+    result += count.toString();
+  }
+
+  return clean(result);
+}
+
+// ----------------------------
+//  ANA ÇALIŞTIRICI
+// ----------------------------
+function calc(type){
+  let A = document.getElementById("numA").value.trim();
+  let B = document.getElementById("numB").value.trim();
+  let out = document.getElementById("result");
+
+  if(!A || !B){
+    out.innerHTML = "<span style='color:var(--danger);'><i class='fas fa-exclamation-triangle'></i> Lütfen iki sayı girin.</span>";
+    return;
+  }
+
+  let result;
+
+  switch(type){
+    case "add": result = add(A,B); break;
+    case "sub": 
+      if(cmp(A,B)>=0) result = sub(A,B);
+      else result = "-"+sub(B,A);
+      break;
+    case "mul": result = mul(A,B); break;
+    case "div": result = div(A,B); break;
+  }
+
+  out.textContent = result;
+}
+
+// ----------------------------
+//  RESET
+// ----------------------------
+function resetAll(){
+  document.getElementById("numA").value="";
+  document.getElementById("numB").value="";
+  document.getElementById("result").innerHTML="<i class='fas fa-info-circle'></i> Henüz işlem yapılmadı.";
+}
+</script>
+
+</body>
+</html>
