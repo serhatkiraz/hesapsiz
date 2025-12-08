@@ -1,385 +1,547 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hesapsız | Serhat Kiraz</title>
-
+<!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --primary:#4361ee;
-  --primary-dark:#3a56d4;
-  --secondary:#7209b7;
-  --success:#4cc9f0;
-  --danger:#f72585;
-  --warning:#f9c74f;
-  --light:#f8f9fa;
-  --dark:#212529;
-  --gray:#6c757d;
-  --border-radius:12px;
-  --box-shadow:0 8px 30px rgba(0,0,0,0.12);
-  --transition:all .3s ease;
+/* ===============================
+   VARIABLES (Ana sayfa ile aynı)
+   =============================== */
+:root {
+  --primary: #552583;
+  --secondary: #FDB927;
+  --light: #808080;
+  --dark: #000;
+  --border-radius: 12px;
+  --box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  --transition: all .3s ease;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-
-body{
-  background:linear-gradient(135deg,#f5f7fa,#c3cfe2);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  color:var(--dark);
+/* ===============================
+   GLOBAL STYLES
+   =============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
-.calculator{
-  background:white;
-  width:100%;
-  max-width:800px;
-  border-radius:var(--border-radius);
-  box-shadow:var(--box-shadow);
-  overflow:hidden;
+body {
+  background: #000;
+  color: var(--dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-.header{
-  background:linear-gradient(90deg,var(--primary),var(--secondary));
-  color:white;
-  padding:25px 30px;
-  position:relative;
+.container {
+  background: var(--light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  max-width: 800px;
+  overflow: hidden;
+  transition: var(--transition);
 }
 
-.header h1{
-  font-size:1.8rem;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  gap:12px;
+/* ===============================
+   HEADER (Ana sayfa ile aynı stil)
+   =============================== */
+.header {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  color: var(--dark);
+  padding: 25px 30px;
+  position: relative;
 }
 
-.subtitle{
-  font-size:.95rem;opacity:.9;margin-top:5px;
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
-.clear-btn{
-  position:absolute;
-  top:20px;
-  right:20px;
-  background:rgba(255,255,255,0.2);
-  border:none;
-  color:white;
-  padding:8px 16px;
-  border-radius:50px;
-  font-size:.9rem;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  transition:var(--transition);
+.header h1 i {
+  font-size: 1.5rem;
 }
 
-.clear-btn:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px);}
-
-.content{
-  padding:30px;
-  display:flex;
-  flex-direction:column;
-  gap:25px;
+.subtitle {
+  font-size: .95rem;
+  opacity: .9;
+  margin-top: 5px;
+  text-align: center;
 }
 
-.section{
-  background:var(--light);
-  border:1px solid #eaeaea;
-  border-radius:var(--border-radius);
-  padding:22px;
+/* ===============================
+   BUTTONS (Tutarlı buton stili)
+   =============================== */
+.btn-reset {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: var(--dark);
+  padding: 8px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
 }
 
-.section-title{
-  font-size:1.1rem;
-  font-weight:600;
-  margin-bottom:18px;
-  color:var(--primary);
-  display:flex;align-items:center;gap:10px;
+.btn-reset:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
-textarea{
-  width:100%;
-  padding:14px 16px;
-  border:2px solid #e0e0e0;
-  border-radius:8px;
-  font-size:1rem;
-  resize:vertical;
-  min-height:55px;
-  max-height:250px;
-  transition:var(--transition);
+.btn {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: .95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
 }
 
-textarea:focus{
-  outline:none;
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(67,97,238,0.2);
+.btn-primary {
+  background: var(--primary);
+  color: white;
 }
 
-.btn{
-  padding:14px 24px;
-  border:none;
-  border-radius:8px;
-  font-weight:600;
-  cursor:pointer;
-  transition:var(--transition);
-  display:flex;
-  align-items:center;
-  gap:8px;
+.btn-primary:hover {
+  background: var(--secondary);
+  color: var(--dark);
+  transform: translateY(-2px);
 }
 
-.btn-primary{background:var(--primary);color:white;}
-.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px);}
-
-.btn-group{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:12px;
+.btn-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.result-container{
-  background:#f8f9ff;
-  border:1px solid #e0e7ff;
-  border-radius:var(--border-radius);
+/* ===============================
+   CONTENT SECTIONS
+   =============================== */
+.content {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background: var(--light);
+  color: var(--dark);
 }
 
-.result-header{
-  background:linear-gradient(90deg,#4cc9f0,#4361ee);
-  color:white;
-  padding:18px 25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.section {
+  background: var(--light);
+  border-radius: var(--border-radius);
+  padding: 22px;
+  border: 1px solid #eaeaea;
 }
 
-#result{
-  padding:25px;
-  min-height:120px;
-  max-height:350px;
-  overflow-y:auto;
-  font-size:1.1rem;
-  word-break:break-all;
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-footer{
-  text-align:center;
-  padding:18px;
-  color:var(--gray);
-  font-size:.9rem;
-  border-top:1px solid #eee;
+.section-title i {
+  color: var(--secondary);
+}
+
+/* ===============================
+   INPUT FIELDS
+   =============================== */
+label {
+  display: block;
+  font-size: .9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--dark);
+}
+
+textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: var(--transition);
+  background: white;
+  color: var(--dark);
+  resize: vertical;
+  min-height: 80px;
+  font-family: 'Courier New', monospace;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(85, 37, 131, 0.2);
+}
+
+/* ===============================
+   RESULT SECTION (Ana sayfa proje stili)
+   =============================== */
+.result-container {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1px solid #e0e7ff;
+}
+
+.result-header {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 18px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result-header .section-title {
+  margin-bottom: 0;
+  color: white;
+}
+
+.result-header .section-title i {
+  color: white;
+}
+
+.btn-copy {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.btn-copy:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+#result {
+  padding: 25px;
+  min-height: 100px;
+  background: linear-gradient(135deg, var(--primary), #3a1a5e);
+  color: white;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+#result i {
+  opacity: 0.7;
+}
+
+/* ===============================
+   FOOTER (Ana sayfa ile aynı)
+   =============================== */
+.footer {
+  text-align: center;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  color: var(--dark);
+  padding: 25px 30px;
+  position: relative;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer p:last-child {
+  margin-bottom: 0;
+}
+
+.footer a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+@media (max-width: 768px) {
+  .btn-group {
+    flex-direction: column;
+  }
+  
+  .result-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    padding: 20px;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .footer p {
+    flex-direction: column;
+    gap: 5px;
+  }
 }
 </style>
 </head>
-
 <body>
-<div class="calculator">
+<div class="container">
 
+  <!-- HEADER -->
   <div class="header">
     <h1><i class="fas fa-calculator"></i> Hesapsız</h1>
-    <p class="subtitle">Büyük Sayılar İçin Sınırsız Hesap Makinesi</p>
-    <button class="clear-btn" onclick="resetAll()"><i class="fas fa-redo"></i> SIFIRLA</button>
+    <p class="subtitle">Unlimited Calculator for Large Numbers</p>
+    <button class="btn-reset" onclick="resetAll()"><i class="fas fa-redo"></i> RESET</button>
   </div>
 
+  <!-- MAIN CONTENT -->
   <div class="content">
 
-    <!-- Girdi Alanları -->
-    <div class="section">
-      <div class="section-title"><i class="fas fa-sliders-h"></i> Sayıları Girin</div>
+    <!-- Input Fields -->
 
-      <label>Birinci sayı</label>
-      <textarea id="numA" placeholder="Birinci sayı..."></textarea>
 
-      <label style="margin-top:15px;">İkinci sayı</label>
-      <textarea id="numB" placeholder="İkinci sayı..."></textarea>
-    </div>
 
-    <!-- Dört İşlem -->
-    <div class="section">
-      <div class="section-title"><i class="fas fa-divide"></i> İşlem Seçin</div>
+      <textarea id="numA" placeholder="Enter first number"></textarea>
+
+<br>
+      <textarea id="numB" placeholder="Enter second number..."></textarea>
+
 
       <div class="btn-group">
-        <button class="btn btn-primary" onclick="calc('add')"><i class="fas fa-plus"></i> Topla</button>
-        <button class="btn btn-primary" onclick="calc('sub')"><i class="fas fa-minus"></i> Çıkar</button>
-        <button class="btn btn-primary" onclick="calc('mul')"><i class="fas fa-times"></i> Çarp</button>
-        <button class="btn btn-primary" onclick="calc('div')"><i class="fas fa-divide"></i> Böl</button>
+        <button class="btn btn-primary" onclick="calc('add')"><i class="fas fa-plus"></i></button>
+        <button class="btn btn-primary" onclick="calc('sub')"><i class="fas fa-minus"></i></button>
+        <button class="btn btn-primary" onclick="calc('mul')"><i class="fas fa-times"></i></button>
+        <button class="btn btn-primary" onclick="calc('div')"><i class="fas fa-divide"></i></button>
       </div>
-    </div>
 
-    <!-- Sonuç -->
+
+    <!-- Result -->
     <div class="result-container">
       <div class="result-header">
-        <div class="result-title"><i class="fas fa-chart-line"></i> Sonuç</div>
+        <div class="section-title"><i class="fas fa-chart-line"></i> Result</div>
+        <button class="btn-copy" onclick="copyResult()"><i class="far fa-copy"></i> Copy Result</button>
       </div>
-      <div id="result"><i class="fas fa-info-circle"></i> Henüz işlem yapılmadı.</div>
+      <div id="result"><i class="fas fa-info-circle"></i> No calculation performed yet.</div>
     </div>
 
   </div>
 
-  <footer>
-    <p><i class="far fa-lightbulb"></i> Tüm hesaplamalar tarayıcınızda gerçekleşir. Verileriniz kaydedilmez.</p>
-    <p>© 2025 <a href="https://serhatkiraz.github.io/" target="_blank" style="color:inherit;font-weight:600;text-decoration:none;">Serhat Kiraz</a> — Hesapsız</p>
-  </footer>
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-content">
+      <p><i class="far fa-copyright"></i> <a href="https://serhatkiraz.github.io/" target="_blank">Serhat Kiraz</a></p>
+    </div>
+  </div>
 
 </div>
 
 <script>
 // ----------------------------
-//  BÜYÜK SAYI HESAPLAMA MOTORU
+//  LARGE NUMBER CALCULATION ENGINE
 // ----------------------------
-
-// String → Remove spaces
-function clean(n){
-  return n.replace(/\s+/g,"").replace(/^0+(?=\d)/,"");
+function clean(n) {
+  return n.replace(/\s+/g, "").replace(/^0+(?=\d)/, "");
 }
 
-// Str → Compare
-function cmp(a,b){
-  a = clean(a); b = clean(b);
-  if(a.length !== b.length) return a.length > b.length ? 1 : -1;
-  if(a === b) return 0;
+function cmp(a, b) {
+  a = clean(a);
+  b = clean(b);
+  if (a.length !== b.length) return a.length > b.length ? 1 : -1;
+  if (a === b) return 0;
   return a > b ? 1 : -1;
 }
 
-// String Toplama
-function add(a,b){
-  a = clean(a); b = clean(b);
-  let res="",carry=0;
+function add(a, b) {
+  a = clean(a);
+  b = clean(b);
+  let res = "", carry = 0;
   a = a.split("").reverse();
   b = b.split("").reverse();
-
-  let m = Math.max(a.length,b.length);
-  for(let i=0;i<m;i++){
-    let x = parseInt(a[i]||"0");
-    let y = parseInt(b[i]||"0");
-    let s = x+y+carry;
-    res = (s%10)+res;
-    carry = Math.floor(s/10);
+  let m = Math.max(a.length, b.length);
+  for (let i = 0; i < m; i++) {
+    let x = parseInt(a[i] || "0");
+    let y = parseInt(b[i] || "0");
+    let s = x + y + carry;
+    res = (s % 10) + res;
+    carry = Math.floor(s / 10);
   }
-  if(carry) res = carry+res;
+  if (carry) res = carry + res;
   return res;
 }
 
-// String Çıkarma  (a ≥ b)
-function sub(a,b){
-  a = clean(a); b = clean(b);
-  if(cmp(a,b)===0) return "0";
-
-  let res="",borrow=0;
+function sub(a, b) {
+  a = clean(a);
+  b = clean(b);
+  if (cmp(a, b) === 0) return "0";
+  let res = "", borrow = 0;
   a = a.split("").reverse();
   b = b.split("").reverse();
-
-  for(let i=0;i<a.length;i++){
+  for (let i = 0; i < a.length; i++) {
     let x = parseInt(a[i]);
-    let y = parseInt(b[i]||"0");
+    let y = parseInt(b[i] || "0");
     x -= borrow;
-
-    if(x<y){x+=10;borrow=1;} else borrow=0;
-
-    res = (x-y)+res;
+    if (x < y) {
+      x += 10;
+      borrow = 1;
+    } else borrow = 0;
+    res = (x - y) + res;
   }
   return clean(res);
 }
 
-// String Çarpma
-function mul(a,b){
-  a = clean(a); b = clean(b);
-  if(a==="0"||b==="0") return "0";
-
+function mul(a, b) {
+  a = clean(a);
+  b = clean(b);
+  if (a === "0" || b === "0") return "0";
   let A = a.split("").reverse();
   let B = b.split("").reverse();
-  let res = Array(a.length+b.length).fill(0);
-
-  for(let i=0;i<A.length;i++){
-    for(let j=0;j<B.length;j++){
-      let p = parseInt(A[i]) * parseInt(B[j]);
-      res[i+j] += p;
+  let res = Array(a.length + b.length).fill(0);
+  for (let i = 0; i < A.length; i++) {
+    for (let j = 0; j < B.length; j++) {
+      res[i + j] += parseInt(A[i]) * parseInt(B[j]);
     }
   }
-
-  for(let i=0;i<res.length;i++){
-    if(res[i]>=10){
-      res[i+1] += Math.floor(res[i]/10);
+  for (let i = 0; i < res.length; i++) {
+    if (res[i] >= 10) {
+      res[i + 1] += Math.floor(res[i] / 10);
       res[i] %= 10;
     }
   }
-
-  while(res.length>1 && res[res.length-1]===0)
-    res.pop();
-
+  while (res.length > 1 && res[res.length - 1] === 0) res.pop();
   return res.reverse().join("");
 }
 
-// Uzun Bölme (tam bölüm)
-function div(a,b){
+function div(a, b) {
   a = clean(a);
   b = clean(b);
-  if(b==="0") return "Tanımsız";
-  if(cmp(a,b)<0) return "0";
-
-  let result="";
-  let cur="";
-
-  for(let digit of a){
+  if (b === "0") return "Undefined";
+  if (cmp(a, b) < 0) return "0";
+  let result = "", cur = "";
+  for (let digit of a) {
     cur += digit;
     cur = clean(cur);
-
-    let count=0;
-    while(cmp(cur,b)>=0){
-      cur = sub(cur,b);
+    let count = 0;
+    while (cmp(cur, b) >= 0) {
+      cur = sub(cur, b);
       count++;
     }
     result += count.toString();
   }
-
   return clean(result);
 }
 
 // ----------------------------
-//  ANA ÇALIŞTIRICI
+//  UI FUNCTIONS
 // ----------------------------
-function calc(type){
+function calc(type) {
   let A = document.getElementById("numA").value.trim();
   let B = document.getElementById("numB").value.trim();
   let out = document.getElementById("result");
-
-  if(!A || !B){
-    out.innerHTML = "<span style='color:var(--danger);'><i class='fas fa-exclamation-triangle'></i> Lütfen iki sayı girin.</span>";
+  
+  if (!A || !B) {
+    out.innerHTML = "<span style='color: #ff6b6b;'><i class='fas fa-exclamation-triangle'></i> Please enter both numbers.</span>";
     return;
   }
-
+  
   let result;
-
-  switch(type){
-    case "add": result = add(A,B); break;
-    case "sub": 
-      if(cmp(A,B)>=0) result = sub(A,B);
-      else result = "-"+sub(B,A);
+  switch (type) {
+    case "add":
+      result = add(A, B);
       break;
-    case "mul": result = mul(A,B); break;
-    case "div": result = div(A,B); break;
+    case "sub":
+      result = cmp(A, B) >= 0 ? sub(A, B) : "-" + sub(B, A);
+      break;
+    case "mul":
+      result = mul(A, B);
+      break;
+    case "div":
+      result = div(A, B);
+      break;
   }
-
-  out.textContent = result;
+  
+  out.innerHTML = `<span style="color: var(--secondary); font-weight: 600;">${result}</span>`;
+  
+  // Format için karakter sayısını göster
+  const charCount = result.toString().length;
+  out.innerHTML += `<br><small style="opacity: 0.7; font-size: 0.9rem;">(${charCount} digits)</small>`;
 }
 
-// ----------------------------
-//  RESET
-// ----------------------------
-function resetAll(){
-  document.getElementById("numA").value="";
-  document.getElementById("numB").value="";
-  document.getElementById("result").innerHTML="<i class='fas fa-info-circle'></i> Henüz işlem yapılmadı.";
+function resetAll() {
+  document.getElementById("numA").value = "";
+  document.getElementById("numB").value = "";
+  document.getElementById("result").innerHTML = "<i class='fas fa-info-circle'></i> No calculation performed yet.";
+}
+
+function copyResult() {
+  const resultElement = document.getElementById("result");
+  const resultText = resultElement.textContent.split('(')[0].trim(); // Sadece sonucu al
+  
+  if (resultText && resultText !== "No calculation performed yet.") {
+    navigator.clipboard.writeText(resultText)
+      .then(() => {
+        const copyBtn = document.querySelector('.btn-copy');
+        const originalHtml = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        copyBtn.style.background = 'rgba(76, 175, 80, 0.3)';
+        
+        setTimeout(() => {
+          copyBtn.innerHTML = originalHtml;
+          copyBtn.style.background = '';
+        }, 2000);
+      })
+      .catch(err => {
+        alert('Failed to copy: ' + err);
+      });
+  }
 }
 </script>
-
 </body>
-
 </html>
