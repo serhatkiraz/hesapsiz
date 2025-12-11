@@ -1,7 +1,7 @@
 :root { --primary: #552583; --secondary: #FDB927; --light: #808080; --dark: #000; --border-radius: 12px; --box-shadow: 0 8px 30px rgba(0,0,0,0.12); --transition: all .3s ease; }
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 body { background: #000; color: var(--dark); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
-.container { background: var(--light); border-radius: var(--border-radius); box-shadow: var(--box-shadow); width: 100%; max-width: 800px; overflow: hidden; transition: var(--transition); }
+.container { background: var(--light); border-radius: var(--border-radius); box-shadow: var(--box-shadow); width: 100%; max-width: 1000px; overflow: hidden; transition: var(--transition); }
 .header { background: linear-gradient(90deg, var(--primary), var(--secondary)); color: var(--dark); padding: 25px 30px; position: relative; }
 .header h1 { font-size: 1.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px; }
 .header h1 i { font-size: 1.5rem; }
